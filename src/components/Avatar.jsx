@@ -5,6 +5,7 @@ export function Avatar({ hasBorder = true, src }) {
     <img
       className={hasBorder ? styles.avatarWithBorder : styles.avatar}
       src={src}
+      title="Image do avatar"
     />
   );
 }
