@@ -11,7 +11,7 @@ export function Sidebar() {
         title="Imagem do cover da sidebar"
       />
       <div className={styles.profile}>
-        <Avatar src="https://github.com/bfukumori.png" />
+        <Avatar src="https://github.com/bfukumori.png" alt="Imagem do avatar" />
         <strong>Bruno Fukumori</strong>
         <span>Web Developer</span>
       </div>

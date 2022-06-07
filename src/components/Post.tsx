@@ -1,13 +1,40 @@
 import { format, formatDistanceToNow } from "date-fns/esm";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ptBR } from "date-fns/esm/locale";
 import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
-export function Post({ author, content, publishedAt }) {
-  const [comments, setComments] = useState([]);
+type Author = {
+  avatarUrl: string;
+  name: string;
+  role: string;
+};
+
+enum ContentType {
+  Paragraph = "paragraph",
+  Link = "link",
+}
+
+type Content = {
+  type: ContentType;
+  content: string;
+};
+
+export type CommentData = {
+  id: string;
+  content: string;
+};
+
+interface PostProps {
+  author: Author;
+  content: Content[];
+  publishedAt: Date;
+}
+
+export function Post({ author, content, publishedAt }: PostProps) {
+  const [comments, setComments] = useState<CommentData[]>([]);
   const [newCommentText, setNewCommentText] = useState("");
 
   const isNewCommentEmpty = newCommentText.length === 0;
@@ -24,7 +51,7 @@ export function Post({ author, content, publishedAt }) {
     locale: ptBR,
   });
 
-  function handleCreateNewComment() {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
     const newComment = {
       id: uuidv4(),
@@ -34,19 +61,19 @@ export function Post({ author, content, publishedAt }) {
     setNewCommentText("");
   }
 
-  function handleNewCommentChange(event) {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
   }
 
-  function deleteComment(id) {
+  function deleteComment(id: string) {
     const newCommentsArray = comments.filter((comment) => {
       return comment.id !== id;
     });
     setComments(newCommentsArray);
   }
 
-  function handleNewCommentInvalid(event) {
+  function handleNewCommentInvalid(event: ChangeEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity("Esse campo é obrigatório!");
   }
 
@@ -54,7 +81,7 @@ export function Post({ author, content, publishedAt }) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.avatarUrl} />
+          <Avatar src={author.avatarUrl} alt="Imagem do avatar" />
           <div className={styles.authorinfo}>
             <strong>{author.name}</strong>
             <span>{author.role}</span>
