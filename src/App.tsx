@@ -15,15 +15,15 @@ const posts = [
     content: [
       {
         type: "paragraph",
-        content:
+        contentText:
           "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa deserunt aperiam molestias hic necessitatibus sapiente facere voluptate, rem nihil officiis magni cupiditate expl.",
       },
       {
         type: "paragraph",
-        content:
+        contentText:
           "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa deserunt aperiam molestias hic necessitatibus sapiente facere voluptate, rem nihil officiis magni cupiditate explicabo aspernatur et accusamus, eum similique quae. Ab.",
       },
-      { type: "link", content: "bfukumori/ignite-feed" },
+      { type: "link", contentText: "bfukumori/ignite-feed" },
     ],
     publishedAt: new Date("2022-06-05 18:00:00"),
   },
@@ -37,15 +37,15 @@ const posts = [
     content: [
       {
         type: "paragraph",
-        content:
+        contentText:
           "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa deserunt aperiam molestias ficiis magni cupiditate explicabo aspernatur et accusamus, eum similique quae. Ab.",
       },
       {
         type: "paragraph",
-        content:
+        contentText:
           "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa deserunt aperiam molestias hic necessitatibus sapiente facere voluptate, rem nihil officiis magni cupiditate explicabo aspernatur et accusamus, eum similique quae. Ab.",
       },
-      { type: "link", content: "diego3g/ignite-feed" },
+      { type: "link", contentText: "diego3g/ignite-feed" },
     ],
     publishedAt: new Date("2022-05-10 20:00:00"),
   },

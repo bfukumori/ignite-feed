@@ -12,14 +12,9 @@ type Author = {
   role: string;
 };
 
-enum ContentType {
-  Paragraph = "paragraph",
-  Link = "link",
-}
-
 type Content = {
-  type: ContentType;
-  content: string;
+  type: string;
+  contentText: string;
 };
 
 export type CommentData = {
@@ -95,11 +90,11 @@ export function Post({ author, content, publishedAt }: PostProps) {
         {content.map((line) => {
           switch (line.type) {
             case "paragraph":
-              return <p key={line.content}>{line.content}</p>;
+              return <p key={line.contentText}>{line.contentText}</p>;
             case "link":
               return (
-                <p key={line.content}>
-                  <a href="#">{line.content}</a>
+                <p key={line.contentText}>
+                  <a href="#">{line.contentText}</a>
                 </p>
               );
             default:
