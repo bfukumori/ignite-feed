@@ -47,8 +47,8 @@ Project developed during the ReactJS Ignite Course from [Rocketseat](https://www
 
 - [x] Base layout
 - [x] Responsivity
-- [ ] Add Typescript
-- [ ] Base functionality (create/delete a comment, likes) without DB
+- [x] Add Typescript
+- [x] Base functionality (create/delete a comment, likes) without DB
 - [ ] Login and Authentication
 - [ ] Add DB and CRUD routes
 - [ ] Light/Dark Theme
