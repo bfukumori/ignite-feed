@@ -49,9 +49,7 @@ Project developed during the ReactJS Ignite Course from [Rocketseat](https://www
 - [x] Responsivity
 - [x] Add Typescript
 - [x] Base functionality (create/delete a comment, likes) without DB
-- [ ] Login and Authentication
-- [ ] Add DB and CRUD routes
-- [ ] Light/Dark Theme
+- [x] Very simple authentication using Mock Service Worker and Session Storage
 ---
 
 ## How it works
