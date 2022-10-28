@@ -1,18 +1,18 @@
-import { format, formatDistanceToNow } from "date-fns/esm";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { ptBR } from "date-fns/esm/locale";
-import { Avatar } from "./Avatar";
-import { Comment } from "./Comment";
-import styles from "./Post.module.css";
+import { format, formatDistanceToNow } from 'date-fns/esm';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { ptBR } from 'date-fns/esm/locale';
+import { Avatar } from './Avatar';
+import { Comment } from './Comment';
+import styles from './Post.module.css';
 
-type Author = {
-  avatarUrl: string;
+export type Author = {
+  avatar: string;
   name: string;
-  role: string;
+  bio: string;
 };
 
-type Content = {
+export type Content = {
   type: string;
   contentText: string;
 };
@@ -20,9 +20,10 @@ type Content = {
 export type CommentData = {
   id: string;
   content: string;
+  createdAt: Date;
 };
 
-interface PostProps {
+export interface PostProps {
   author: Author;
   content: Content[];
   publishedAt: Date;
@@ -30,7 +31,7 @@ interface PostProps {
 
 export function Post({ author, content, publishedAt }: PostProps) {
   const [comments, setComments] = useState<CommentData[]>([]);
-  const [newCommentText, setNewCommentText] = useState("");
+  const [newCommentText, setNewCommentText] = useState('');
 
   const isNewCommentEmpty = newCommentText.length === 0;
 
@@ -51,13 +52,14 @@ export function Post({ author, content, publishedAt }: PostProps) {
     const newComment = {
       id: uuidv4(),
       content: newCommentText,
+      createdAt: new Date(),
     };
     setComments([...comments, newComment]);
-    setNewCommentText("");
+    setNewCommentText('');
   }
 
   function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    event.target.setCustomValidity("");
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
 
@@ -69,17 +71,17 @@ export function Post({ author, content, publishedAt }: PostProps) {
   }
 
   function handleNewCommentInvalid(event: ChangeEvent<HTMLTextAreaElement>) {
-    event.target.setCustomValidity("Esse campo é obrigatório!");
+    event.target.setCustomValidity('Esse campo é obrigatório!');
   }
 
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.avatarUrl} alt="Imagem do avatar" />
+          <Avatar src={author.avatar} alt='Imagem do avatar' />
           <div className={styles.authorinfo}>
             <strong>{author.name}</strong>
-            <span>{author.role}</span>
+            <span>{author.bio}</span>
           </div>
         </div>
         <time title={publishedAtFormatted} dateTime={publishedAt.toISOString()}>
@@ -89,12 +91,12 @@ export function Post({ author, content, publishedAt }: PostProps) {
       <div className={styles.content}>
         {content.map((line) => {
           switch (line.type) {
-            case "paragraph":
+            case 'paragraph':
               return <p key={line.contentText}>{line.contentText}</p>;
-            case "link":
+            case 'link':
               return (
                 <p key={line.contentText}>
-                  <a href="#">{line.contentText}</a>
+                  <a href='#'>{line.contentText}</a>
                 </p>
               );
             default:
@@ -107,12 +109,12 @@ export function Post({ author, content, publishedAt }: PostProps) {
         <textarea
           value={newCommentText}
           onChange={handleNewCommentChange}
-          placeholder="Deixe um comentário"
+          placeholder='Deixe um comentário'
           onInvalid={handleNewCommentInvalid}
           required
         />
         <footer>
-          <button type="submit" disabled={isNewCommentEmpty}>
+          <button type='submit' disabled={isNewCommentEmpty}>
             Publicar
           </button>
         </footer>
